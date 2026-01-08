@@ -1,0 +1,82 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: movie_backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:2055@db:5432/MovieDB
+    depends_on:
+      - db
+    restart: always
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: movie_frontend
+    ports:
+      - "80:80"   # Serve production build via nginx on port 80
+    restart: always
+
+  db:
+    image: postgres:17
+    container_name: movie_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 2055
+      POSTGRES_DB: MovieDB
+    ports:
+      - "5432:5432"  # Exposed so your laptop pgAdmin can connect
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+
+
+# version: "3.9"
+
+# services:
+#   backend:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: movie_backend
+#     ports:
+#       - "8000:8000"
+#     environment:
+#       DATABASE_URL: postgresql://postgres:2055@db:5432/MovieDB
+#     depends_on:
+#       - db
+#     restart: always
+
+#   frontend:
+#     build:
+#       context: ../frontend
+#       dockerfile: Dockerfile
+#     container_name: movie_frontend
+#     ports:
+#       - "5173:5173"
+#     restart: always
+
+#   db:
+#     image: postgres:17
+#     container_name: movie_postgres
+#     restart: always
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: 2055
+#       POSTGRES_DB: MovieDB
+#     ports:
+#       - "5432:5432"  # Exposed so your laptop pgAdmin can connect
+#     volumes:
+#       - pgdata:/var/lib/postgresql/data
+
+# volumes:
+#   pgdata:
