@@ -7,4 +7,3 @@ try now
 final test check it out
 checking the pr
 now check if it works
-testing pr approvals 2
