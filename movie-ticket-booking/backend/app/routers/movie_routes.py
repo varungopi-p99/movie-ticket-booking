@@ -46,3 +46,9 @@ async def get_movie(movie_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Movie not found")
     return movie
 
+@router.get("/livemovies/{movie_id}", response_model=MovieResponse)
+async def get_livemovies(movie_id: int, db: Session = Depends(get_db)):
+    movie = db.query(models.Movie).filter(models.Movie.id == movie_id).first()
+    if not movie:
+        raise HTTPException(status_code=404, detail="Movie not found")
+    return movie
