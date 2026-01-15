@@ -9,7 +9,7 @@ import BookingPage from "./pages/Bookingpage";
 import Showtime from "./pages/Showtime";
 import Seat from "./pages/Seat";
 import Upcomming from "./pages/Upcomming";
-
+import ReleasingSoon from "./pages/ReleasingSoon";
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/upcomming/:movieId" element={<Upcomming />} />
+        <Route path="/releasing-soon/:movieId" element={<ReleasingSoon />} />
         <Route path="/showtimes/:movieId" element={<Showtime />} />
         <Route path="/seats/:showtimeId" element={<Seat />} />
         <Route path="/booking" element={<Booking />} />
